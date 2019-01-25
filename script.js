@@ -1,21 +1,26 @@
-//End date
+// Date variables
 var reservDay = new Date("May 31, 2019 12:00:00").getTime();
+var startDay = new Date("July 02, 2018 12:00:00").getTime();
 
 var timerFunction = function(){
     var now = new Date().getTime();
 
-    //The distance from now until the end date.
-    var distance = reservDay - now;
+    // Time variables
+    var timeLeft = reservDay - now;
+    var total = reservDay - startDay;
+    var timePassed = now - startDay;
 
-    //Time calculations
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000* 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Time calculations
+    var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((timeLeft % (1000* 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-    //display the result
-    document.getElementById("header").getElementsByTagName("h1")[1].innerHTML =
-    days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    var percent = Math.round(timePassed * 100 / total * 100) / 100;
+
+    // Display the result
+    $("#date").html(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+    $("#percent").html(percent + "%");
 }
 
 setInterval(timerFunction, 1000);
